@@ -1,17 +1,20 @@
-// src/App.jsx
-import React from 'react';
-import SignUp from './SignUp';
-import Login from './Login';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./Components/Login/login";
+import UsersHome from "./Components/Home/usersHome";
+import SignUp from "./Components/SignUp/signup";
+import AdminHome from "./Components/Home/adminHome";
 
-const App = () => {
-    return (
-        <div>
-            <h1>Library Management System</h1>
-            <SignUp />
-            <Login />
-        </div>
-    );
-};
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/usershome" element={<UsersHome />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/adminhome" element={<AdminHome />} />
+      </Routes>
+    </Router>
+  );
+}
 
 export default App;
-
