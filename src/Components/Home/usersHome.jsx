@@ -32,30 +32,61 @@ const UsersHome = () => {
   };
 
 
-const handleToggleFavorite = async (bookId) => {
-  const userId = localStorage.getItem("userId");
-  if (!userId) {
+  const handleToggleFavorite = async (bookId) => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
       alert("User not logged in");
       return;
-  }
+    }
 
-  try {
+    try {
       const response = await fetch("http://localhost:3000/favorites", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId: userId, bookId: bookId })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: userId, bookId: bookId })
       });
 
       const data = await response.json();
       if (response.ok) {
-          console.log(data.message);
+        console.log(data.message);
       } else {
-          console.error(data.message);
+        console.error(data.message);
       }
-  } catch (error) {
+    } catch (error) {
       console.error("Error adding/removing from favorites:", error);
-  }
-};
+    }
+  };
+
+  const handleAddToShoppingList = async (bookId) => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      alert("User not logged in");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/shopping-list", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          bookId: bookId,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data.message);
+        alert(data.message); // نمایش پیام موفقیت
+      } else {
+        console.error(data.message);
+        alert(data.message); // نمایش خطای دریافت شده از سرور
+      }
+    } catch (error) {
+      console.error("Error adding to shopping list:", error);
+    }
+  };
 
 
   return (
@@ -69,23 +100,26 @@ const handleToggleFavorite = async (bookId) => {
           <a href="/shopping">Shopping List</a>
         </nav>
         <ul>
-    {books.map((book) => {
-        
+          {books.map((book) => {
 
-        return (
-            <li key={book.id}>
+
+            return (
+              <li key={book.id}>
                 <p><strong>Title:</strong> {book.title}</p>
                 <p><strong>Author:</strong> {book.author}</p>
                 <p><strong>Category:</strong> {book.category}</p>
                 <p><strong>Price:</strong> ${book.price}</p>
-                
+
                 <button onClick={() => handleToggleFavorite(book.id)}>
-                    {isFavorite ? "Unlike" : "Like"}
+                  {isFavorite ? "Unlike" : "Like"}
                 </button>
-            </li>
-        );
-    })}
-</ul>
+                <button onClick={() => handleAddToShoppingList(book.id)}>
+                  Add to Shopping List
+                </button>
+              </li>
+            );
+          })}
+        </ul>
 
       </div>
     </div>
