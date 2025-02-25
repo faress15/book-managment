@@ -1,6 +1,5 @@
 /* Users Home Styles */
 .users-home-container {
-  max-width: 800px;
   margin: auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -34,12 +33,15 @@
   border-radius: 5px;
 }
 
+
 .book-list ul {
   list-style-type: none;
   padding: 0;
 }
 
 .book-list li {
+  display: flex;
+  justify-content: space-evenly;
   background: #f8f9fa;
   padding: 15px;
   border-radius: 5px;

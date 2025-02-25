@@ -4,21 +4,22 @@ import "./usersHome.css";
 
 const UsersHome = () => {
   const [books, setBooks] = useState([]);
-  const [user, setUser] = useState(null);
   const [favorites, setFavorites] = useState([]);
-  const [activeTab, setActiveTab] = useState("home");
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId"); // دریافت آی‌دی کاربر از localStorage
+  const isFavorite = false;
 
   useEffect(() => {
     fetchBooks();
-    // Check for authentication
+    checkAuth();
+  }, []);
+
+  const checkAuth = () => {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/");
     }
-    const userId = localStorage.getItem("userId");
-    // fetchFavorites(userId);
-  }, [navigate]);
+  };
 
   const fetchBooks = async () => {
     try {
@@ -30,74 +31,62 @@ const UsersHome = () => {
     }
   };
 
-  const fetchFavorites = async (userId) => {
-    try {
-      const response = await fetch(`http://localhost:3000/favorites/${userId}`);
-      const favoritesData = await response.json();
-      if (Array.isArray(favoritesData)) {
-        setFavorites(favoritesData);
-      } else {
-        console.error("Favorites data is not an array:", favoritesData);
-      }
-    } catch (error) {
-      console.error("Error fetching favorites:", error);
-    }
-  };
 
-  const handleToggleFavorite = async (bookId) => {
-    const userId = localStorage.getItem("userId");
-    try {
+const handleToggleFavorite = async (bookId) => {
+  const userId = localStorage.getItem("userId");
+  if (!userId) {
+      alert("User not logged in");
+      return;
+  }
+
+  try {
       const response = await fetch("http://localhost:3000/favorites", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, bookId }),
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: userId, bookId: bookId })
       });
 
       const data = await response.json();
-      if (data.success) {
-        fetchFavorites(userId);  // Update the favorite list after toggling
+      if (response.ok) {
+          console.log(data.message);
+      } else {
+          console.error(data.message);
       }
-    } catch (error) {
+  } catch (error) {
       console.error("Error adding/removing from favorites:", error);
-    }
-  };
+  }
+};
 
-  const updateBook = async (bookId, updateData) => {
-    const response = await fetch(`http://localhost:3000/books/${bookId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updateData),
-    });
-    if (!response.ok) {
-      throw new Error("Failed to update book");
-    }
-    fetchBooks();
-  };
 
   return (
     <div className="users-home-container">
-      {/* Conditional Rendering for Tabs */}
       <div className="book-list">
         <h2>All Books</h2>
         <nav className="navbar">
-          <a href="/">Home</a>
+          <a href="/usershome">Home</a>
           <a href="/search">Search</a>
-          <a href="/favorites">Favorites</a>
+          <a href="/favorite">Favorites</a>
           <a href="/shopping">Shopping List</a>
         </nav>
         <ul>
-          {books.map((book) => (
+    {books.map((book) => {
+        
+
+        return (
             <li key={book.id}>
-              <p><strong>Title:</strong> {book.title}</p>
-              <p><strong>Author:</strong> {book.author}</p>
-              <p><strong>Category:</strong> {book.category}</p>
-              <p><strong>Price:</strong> ${book.price}</p>
-              {/* <button onClick={() => handleToggleFavorite(book.id)}>
-                  {favorites.some((fav) => fav.bookId === book.id) ? "Unlike" : "Like"}
-                </button> */}
+                <p><strong>Title:</strong> {book.title}</p>
+                <p><strong>Author:</strong> {book.author}</p>
+                <p><strong>Category:</strong> {book.category}</p>
+                <p><strong>Price:</strong> ${book.price}</p>
+                
+                <button onClick={() => handleToggleFavorite(book.id)}>
+                    {isFavorite ? "Unlike" : "Like"}
+                </button>
             </li>
-          ))}
-        </ul>
+        );
+    })}
+</ul>
+
       </div>
     </div>
   );

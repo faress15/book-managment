@@ -47,7 +47,7 @@ const Search = () => {
             <nav className="navbar">
                 <a href="/usershome">Home</a>
                 <a href="/search">Search</a>
-                <a href="/favorites">Favorites</a>
+                <a href="/favorite">Favorites</a>
                 <a href="/shopping">Shopping List</a>
             </nav>
             {/* Dropdown for search type */}

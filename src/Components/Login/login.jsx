@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import "./login.css";
 
 const Login = () => {
@@ -21,6 +22,9 @@ const Login = () => {
     const data = await response.json();
     if (data.success) {
       localStorage.setItem("token", data.token);
+      const decodedToken = jwtDecode(data.token);
+      const userId = decodedToken.id; 
+      localStorage.setItem("userId", userId);
       const tokenPayload = JSON.parse(atob(data.token.split(".")[1]));
       localStorage.setItem("isAdmin", tokenPayload.isAdmin);
       if (tokenPayload.isAdmin) {
