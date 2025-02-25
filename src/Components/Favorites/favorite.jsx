@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./favorite.css"; // استایل دلخواه خود را در این فایل اضافه کن
+import "./favorite.css"; 
 
 const Favorite = () => {
   const [favorites, setFavorite] = useState([]);
   const navigate = useNavigate();
   const isFavorite = false;
 
-  // بررسی وضعیت ورود کاربر (توکن در localStorage)
   useEffect(() => {
     checkAuth();
     fetchFavorite();
   }, []);
 
-  // بررسی ورود کاربر
   const checkAuth = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/"); // به صفحه اصلی بروید اگر کاربر وارد نشده باشد
+      navigate("/"); 
     }
   };
 
-  // درخواست گرفتن لیست کتاب‌های لایک شده (از سرور)
   const fetchFavorite = async () => {
     const userId = localStorage.getItem("userId");
     if (!userId) {
@@ -31,7 +28,7 @@ const Favorite = () => {
     try {
       const response = await fetch(`http://localhost:3000/favorites/${userId}`);
       const favoritesData = await response.json();
-        setFavorite(favoritesData.data); // ذخیره کتاب‌های لایک شده
+        setFavorite(favoritesData.data); 
     } catch (error) {
       console.error("Error fetching favorites:", error);
     }

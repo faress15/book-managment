@@ -6,7 +6,7 @@ const UsersHome = () => {
   const [books, setBooks] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
-  const userId = localStorage.getItem("userId"); // دریافت آی‌دی کاربر از localStorage
+  const userId = localStorage.getItem("userId"); 
   const isFavorite = false;
 
   useEffect(() => {
@@ -78,10 +78,10 @@ const UsersHome = () => {
       const data = await response.json();
       if (response.ok) {
         console.log(data.message);
-        alert(data.message); // نمایش پیام موفقیت
+        alert(data.message); 
       } else {
         console.error(data.message);
-        alert(data.message); // نمایش خطای دریافت شده از سرور
+        alert(data.message); 
       }
     } catch (error) {
       console.error("Error adding to shopping list:", error);

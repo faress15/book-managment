@@ -31,8 +31,8 @@ button {
   border: none;
   padding: 10px 15px;
   cursor: pointer;
-  width: auto; /* Width adjusted */
-  margin-left: 5px; /* Small margin between buttons */
+  width: auto; 
+  margin-left: 5px; 
 }
 
 #error-message {
@@ -57,9 +57,9 @@ button {
 }
 
 #book-list li button {
-  width: 100px; /* Adjust width for buttons */
+  width: 100px; 
   padding: 8px 10px;
-  font-size: 14px; /* Adjust font size if needed */
+  font-size: 14px; 
 }
 
 .read {

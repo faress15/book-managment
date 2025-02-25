@@ -21,20 +21,20 @@ const Search = () => {
         }
     };
 
-    // Function to sort books based on price
+
     const sortBooks = (order) => {
         const sortedBooks = [...books];
         sortedBooks.sort((a, b) => {
             if (order === "asc") {
-                return a.price - b.price; // Sort from low to high
+                return a.price - b.price;
             } else {
-                return b.price - a.price; // Sort from high to low
+                return b.price - a.price;
             }
         });
-        setBooks(sortedBooks); // Update the books state with sorted data
+        setBooks(sortedBooks);
     };
 
-    // Trigger sorting when sortOrder changes
+
     React.useEffect(() => {
         if (books.length > 0) {
             sortBooks(sortOrder);
@@ -50,14 +50,13 @@ const Search = () => {
                 <a href="/favorite">Favorites</a>
                 <a href="/shopping">Shopping List</a>
             </nav>
-            {/* Dropdown for search type */}
             <select onChange={(e) => setSearchType(e.target.value)}>
                 <option value="title">Search by Title</option>
                 <option value="author">Search by Author</option>
                 <option value="category">Search by Category</option>
             </select>
 
-            {/* Input field for search */}
+
             <input
                 type="text"
                 placeholder="Enter search term..."
@@ -70,10 +69,10 @@ const Search = () => {
                 <option value="desc">Price: High to Low</option>
             </select>
 
-           
+
             <button onClick={handleSearch}>Search</button>
 
-            {/* Display search results */}
+
             <div className="search-results">
                 {books.length > 0 ? (
                     <ul>

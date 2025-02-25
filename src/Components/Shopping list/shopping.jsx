@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./shoppingList.css"; // استایل دلخواه خود را در این فایل اضافه کن
+import "./shoppingList.css"; 
 
 const ShoppingList = () => {
   const [shoppingList, setShoppingList] = useState([]);
@@ -12,15 +12,15 @@ const ShoppingList = () => {
     fetchShoppingList();
   }, []);
 
-  // بررسی وضعیت ورود کاربر (توکن در localStorage)
+  
   const checkAuth = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/"); // به صفحه اصلی بروید اگر کاربر وارد نشده باشد
+      navigate("/"); 
     }
   };
 
-  // درخواست گرفتن لیست خرید از سرور
+
   const fetchShoppingList = async () => {
     const userId = localStorage.getItem("userId");
     if (!userId) {
@@ -32,14 +32,14 @@ const ShoppingList = () => {
       const data = await response.json();
       if (Array.isArray(data.data)) {
         setShoppingList(data.data);
-        calculateTotalPrice(data.data); // محاسبه قیمت کل
+        calculateTotalPrice(data.data); 
       }
     } catch (error) {
       console.error("Error fetching shopping list:", error);
     }
   };
 
-  // محاسبه قیمت کل
+  
   const calculateTotalPrice = (list) => {
     const total = list.reduce((sum, book) => sum + parseFloat(book.price), 0);
     setTotalPrice(total);

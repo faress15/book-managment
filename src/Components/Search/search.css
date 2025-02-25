@@ -1,4 +1,3 @@
-/* استایل کلی برای صفحه جستجو */
 .search-container {
     max-width: 600px;
     margin: 50px auto;
@@ -23,13 +22,11 @@
   }
   
   
-  /* عنوان صفحه */
   .search-container h2 {
     color: #333;
     margin-bottom: 15px;
   }
   
-  /* استایل برای دراپ‌داون */
   .search-container select {
     width: 100%;
     padding: 10px;
@@ -40,7 +37,6 @@
     background: #f9f9f9;
   }
   
-  /* استایل برای فیلد ورودی */
   .search-container input {
     width: calc(100% - 22px);
     padding: 10px;
@@ -50,7 +46,6 @@
     font-size: 16px;
   }
   
-  /* استایل برای دکمه جستجو */
   .search-container button {
     width: 100%;
     padding: 10px;
@@ -67,7 +62,6 @@
     background: #0056b3;
   }
   
-  /* استایل برای نمایش نتایج */
   .search-results {
     margin-top: 20px;
   }
