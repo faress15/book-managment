@@ -83,7 +83,7 @@ const UsersHome = () => {
           <a href="/">Home</a>
           <a href="/search">Search</a>
           <a href="/favorites">Favorites</a>
-          <a href="/cart">Cart</a>
+          <a href="/shopping">Shopping List</a>
         </nav>
         <ul>
           {books.map((book) => (
