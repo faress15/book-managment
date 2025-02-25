@@ -42,7 +42,6 @@ const adminHome = () => {
       title,
       author,
       description,
-      is_read: false,
       category,
       price,
       published_date: publishedDate
@@ -134,13 +133,9 @@ const adminHome = () => {
     if (!response.ok) {
       throw new Error("Failed to update book");
     }
-    fetchBooks(); // Refresh after update
+    fetchBooks(); 
   };
 
-  const handleToggleRead = (book, li) => {
-    const updatedBook = { ...book, is_read: !book.is_read };
-    updateBook(book.id, updatedBook);
-  };
 
   return (
     <div className="admin-home-container">
@@ -181,9 +176,6 @@ const adminHome = () => {
             <p><strong>Category:</strong> {book.category}</p>
             <p><strong>Price:</strong> ${book.price}</p>
             <p><strong>Published Date:</strong> {book.published_date}</p>
-            <button onClick={() => handleToggleRead(book)}>
-              {book.is_read ? "UnRead" : "Read"}
-            </button>
             <button
               onClick={() => {
                 if (window.confirm("Are you sure you want to delete this item?")) {

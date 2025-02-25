@@ -1,0 +1,92 @@
+/* استایل کلی برای صفحه جستجو */
+.search-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #007bff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .navbar a{
+    color: white;
+  }
+  
+  
+  /* عنوان صفحه */
+  .search-container h2 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* استایل برای دراپ‌داون */
+  .search-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background: #f9f9f9;
+  }
+  
+  /* استایل برای فیلد ورودی */
+  .search-container input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* استایل برای دکمه جستجو */
+  .search-container button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .search-container button:hover {
+    background: #0056b3;
+  }
+  
+  /* استایل برای نمایش نتایج */
+  .search-results {
+    margin-top: 20px;
+  }
+  
+  .search-results ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .search-results li {
+    background: #f4f4f4;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border-left: 5px solid #007bff;
+    transition: 0.3s;
+  }
+  
+  .search-results li:hover {
+    background: #e8f0ff;
+  }
+  
