@@ -6,13 +6,15 @@ const Search = () => {
     const [searchType, setSearchType] = useState("title");
     const [books, setBooks] = useState([]);
     const [sortOrder, setSortOrder] = useState("asc");
+    const API_URL = import.meta.env.VITE_API_URL;
+
 
     const handleSearch = async () => {
         if (!searchTerm) return;
 
         try {
             const response = await fetch(
-                `http://localhost:3000/books/search?type=${searchType}&query=${searchTerm}`
+                `${API_URL}/books/search?type=${searchType}&query=${searchTerm}`
             );
             const data = await response.json();
             setBooks(data);

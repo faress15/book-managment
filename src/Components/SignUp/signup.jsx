@@ -12,6 +12,8 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
+
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ const SignUp = () => {
       return;
     }
 
-    const verifyResponse = await fetch("http://localhost:3000/verify-code", {
+    const verifyResponse = await fetch(`${API_URL}/verify-code`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, code: verificationCode }),
@@ -38,7 +40,7 @@ const SignUp = () => {
     }
 
 
-    const response = await fetch("http://localhost:3000/signup", {
+    const response = await fetch(`${API_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, isAdmin }),
@@ -61,7 +63,7 @@ const SignUp = () => {
 
   const handleSendCode = async () => {
     try {
-      const response = await fetch("http://localhost:3000/send-verification-code", {
+      const response = await fetch(`${API_URL}/send-verification-code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -79,7 +81,7 @@ const SignUp = () => {
 
   const handleVerifyCode = async () => {
     try {
-      const response = await fetch("http://localhost:3000/verify-code", {
+      const response = await fetch(`${API_URL}/verify-code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code: verificationCode }),

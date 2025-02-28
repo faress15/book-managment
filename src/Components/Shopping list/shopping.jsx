@@ -6,6 +6,8 @@ const ShoppingList = () => {
   const [shoppingList, setShoppingList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
+
 
   useEffect(() => {
     checkAuth();
@@ -28,7 +30,7 @@ const ShoppingList = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/shopping-list/${userId}`);
+      const response = await fetch(`${API_URL}/shopping-list/${userId}`);
       const data = await response.json();
       if (Array.isArray(data.data)) {
         setShoppingList(data.data);
@@ -47,7 +49,7 @@ const ShoppingList = () => {
 
   const handleRemoveFromShoppingList = async (shoppingListId) => {
     try {
-        const response = await fetch(`http://localhost:3000/shopping-list/${shoppingListId}`, {
+        const response = await fetch(`${API_URL}/shopping-list/${shoppingListId}`, {
             method: 'DELETE',
         });
 

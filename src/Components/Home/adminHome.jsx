@@ -11,6 +11,7 @@ const adminHome = () => {
   const [publishedDate, setPublishedDate] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const [error, setError] = useState("");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetchBooks();
@@ -18,7 +19,7 @@ const adminHome = () => {
 
   const fetchBooks = async () => {
     try {
-      const response = await fetch("http://localhost:3000/books");
+      const response = await fetch(`${API_URL}/books`);
       const booksData = await response.json();
       setBooks(booksData);
     } catch (error) {
@@ -79,7 +80,7 @@ const adminHome = () => {
       published_date: publishedDate,
     };
 
-    await fetch(`http://localhost:3000/books/${selectedBook.id}`, {
+    await fetch(`${API_URL}/books/${selectedBook.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedBook),
@@ -101,7 +102,7 @@ const adminHome = () => {
 
 
   const addBook = async (book) => {
-    await fetch("http://localhost:3000/books", {
+    await fetch(`${API_URL}/books`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(book),
@@ -111,7 +112,7 @@ const adminHome = () => {
 
   const deleteBook = async (book) => {
     try {
-      const response = await fetch(`http://localhost:3000/books/${book.id}`, {
+      const response = await fetch(`${API_URL}/books/${book.id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -125,7 +126,7 @@ const adminHome = () => {
   
 
   const updateBook = async (bookId, updateData) => {
-    const response = await fetch(`http://localhost:3000/books/${bookId}`, {
+    const response = await fetch(`${API_URL}/books/${bookId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateData),

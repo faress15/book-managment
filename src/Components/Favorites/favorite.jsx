@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./favorite.css"; 
 
+
 const Favorite = () => {
   const [favorites, setFavorite] = useState([]);
   const navigate = useNavigate();
   const isFavorite = false;
+  const API_URL = import.meta.env.VITE_API_URL;
+
 
   useEffect(() => {
     checkAuth();
@@ -26,7 +29,7 @@ const Favorite = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/favorites/${userId}`);
+      const response = await fetch(`${API_URL}/favorites/${userId}`);
       const favoritesData = await response.json();
         setFavorite(favoritesData.data); 
     } catch (error) {

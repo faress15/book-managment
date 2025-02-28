@@ -8,6 +8,7 @@ const UsersHome = () => {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId"); 
   const isFavorite = false;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetchBooks();
@@ -23,7 +24,7 @@ const UsersHome = () => {
 
   const fetchBooks = async () => {
     try {
-      const response = await fetch("http://localhost:3000/books");
+      const response = await fetch(`${API_URL}/books`);
       const booksData = await response.json();
       setBooks(booksData);
     } catch (error) {
@@ -40,7 +41,7 @@ const UsersHome = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/favorites", {
+      const response = await fetch(`${API_URL}/favorites`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: userId, bookId: bookId })
@@ -65,7 +66,7 @@ const UsersHome = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/shopping-list", {
+      const response = await fetch(`${API_URL}/shopping-list`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
