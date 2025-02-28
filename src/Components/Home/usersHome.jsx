@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./usersHome.css";
 
 const UsersHome = () => {
   const [books, setBooks] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
-  const userId = localStorage.getItem("userId"); 
+  const userId = localStorage.getItem("userId");
   const isFavorite = false;
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -79,10 +80,10 @@ const UsersHome = () => {
       const data = await response.json();
       if (response.ok) {
         console.log(data.message);
-        alert(data.message); 
+        alert(data.message);
       } else {
         console.error(data.message);
-        alert(data.message); 
+        alert(data.message);
       }
     } catch (error) {
       console.error("Error adding to shopping list:", error);
@@ -95,10 +96,10 @@ const UsersHome = () => {
       <div className="book-list">
         <h2>All Books</h2>
         <nav className="navbar">
-          <a href="/usershome">Home</a>
-          <a href="/search">Search</a>
-          <a href="/favorite">Favorites</a>
-          <a href="/shopping">Shopping List</a>
+          <Link to="/usershome">Home</Link>
+          <Link to="/search">Search</Link>
+          <Link to="/favorite">Favorites</Link>
+          <Link to="/shopping">Shopping List</Link>
         </nav>
         <ul>
           {books.map((book) => {

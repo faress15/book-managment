@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./search.css";
 
 const Search = () => {
@@ -47,10 +48,10 @@ const Search = () => {
         <div className="search-container">
             <h2>Search Books</h2>
             <nav className="navbar">
-                <a href="/usershome">Home</a>
-                <a href="/search">Search</a>
-                <a href="/favorite">Favorites</a>
-                <a href="/shopping">Shopping List</a>
+                <Link to="/usershome">Home</Link>
+                <Link to="/search">Search</Link>
+                <Link to="/favorite">Favorites</Link>
+                <Link to="/shopping">Shopping List</Link>
             </nav>
             <select onChange={(e) => setSearchType(e.target.value)}>
                 <option value="title">Search by Title</option>
