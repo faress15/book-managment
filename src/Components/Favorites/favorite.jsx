@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./favorite.css"; 
+import { Link } from "react-router-dom";
+import "./favorite.css";
 
 
 const Favorite = () => {
@@ -18,7 +19,7 @@ const Favorite = () => {
   const checkAuth = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/"); 
+      navigate("/");
     }
   };
 
@@ -31,7 +32,7 @@ const Favorite = () => {
     try {
       const response = await fetch(`${API_URL}/favorites/${userId}`);
       const favoritesData = await response.json();
-        setFavorite(favoritesData.data); 
+      setFavorite(favoritesData.data);
     } catch (error) {
       console.error("Error fetching favorites:", error);
     }
@@ -41,10 +42,10 @@ const Favorite = () => {
     <div className="favorites-container">
       <h2>Favorite Books</h2>
       <nav className="navbar">
-        <a href="/usershome">Home</a>
-        <a href="/search">Search</a>
-        <a href="/favorite">Favorites</a>
-        <a href="/shopping">Shopping List</a>
+        <Link to="/usershome">Home</Link>
+        <Link to="/search">Search</Link>
+        <Link to="/favorite">Favorites</Link>
+        <Link to="/shopping">Shopping List</Link>
       </nav>
       <ul>
         {favorites.length === 0 ? (
@@ -57,8 +58,8 @@ const Favorite = () => {
               <p><strong>Category:</strong> {book.category}</p>
               <p><strong>Price:</strong> ${book.price}</p>
               <button onClick={() => handleToggleFavorite(book.id)}>
-                    {isFavorite ? "Unlike" : "Like"}
-                </button>
+                {isFavorite ? "Unlike" : "Like"}
+              </button>
             </li>
           ))
         )}
